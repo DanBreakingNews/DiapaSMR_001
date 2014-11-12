@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ajustes</title>
+        <meta charset="utf-8" />
+        <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+        <link href="styles/main.css" rel="stylesheet" />
+
+        <script src="cordova.js"></script>
+        <script src="kendo/js/jquery.min.js"></script>
+        <script src="kendo/js/kendo.mobile.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+
+        <script src="scripts/login.js"></script>
+        <script src="scripts/location.js"></script>
+        <script src="scripts/weather.js"></script>
+        <script src="scripts/app.js"></script>
+
+    </head>
+    <body>
+        <div id="view-ajuestes" 
+             data-title="Ajustes" 
+             data-role="view"
+             >
+            <div data-role="header">
+                <div data-role="navbar" style="background-color: black; color: white;">
+                    <span data-role="view-title">Ajustes</span>
+                    <a data-role="backbutton" 
+                       data-align="left" 
+                       style="background-color: black; color: white;"
+                       onClick="navigateBack();">
+                        Back
+                    </a>
+                </div>
+            </div>
+            
+            <script>
+                function navigateBack() 
+            	{
+                	var app = new kendo.mobile.Application();
+                	app.navigate("home.html");
+                }
+            </script>
+        </div>
+    </body>
+</html>

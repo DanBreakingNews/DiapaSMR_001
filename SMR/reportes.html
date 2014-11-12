@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reportes</title>
+        <meta charset="utf-8" />
+        <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+        <link href="styles/main.css" rel="stylesheet" />
+
+        <script src="cordova.js"></script>
+        <script src="kendo/js/jquery.min.js"></script>
+        <script src="kendo/js/kendo.mobile.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+
+        <script src="scripts/login.js"></script>
+        <script src="scripts/location.js"></script>
+        <script src="scripts/weather.js"></script>
+        <script src="scripts/app.js"></script>
+
+    </head>
+    <body>
+        <div id="view-reportes" 
+             data-title="Reportes" 
+             data-role="view"
+             >
+            <div data-role="header">
+                <div data-role="navbar" style="background-color: black; color: white;">
+                    <span data-role="view-title">Reportes</span>
+                    <a data-role="backbutton" 
+                       data-align="left" 
+                       style="background-color: black; color: white;"
+                       onClick="mobileListViewTemplatesInit();">
+                        Back
+                    </a>
+                </div>
+            </div>
+            
+            <ul id="custom-listview"></ul>
+            <script type="text/x-kendo-template" id="customListViewTemplate">
+    			<div class="report_title">
+            		<table style="width: 100%">
+                    	<tr>
+                        	<td style="width: 70%; text-align:left;">
+            					${name}
+            				</td>
+                            <td style="width: 70%; text-align:right;">
+                    			<a class="button" data-role="button" onclick="listClick(${code});" style="background-color: black; color: white; font-size:.7em;">Detalle</a>        
+            				</td>
+            			</tr>
+            		</table>
+                </div>
+    			<div class="report_descp">
+            		${descp}	
+                </div>
+			</script>
+            <script>
+    		var groupedData = [
+                { name: "Productos P&G", descp: "Productos a promocionar de Procter & Gamble.", code: "100" },
+                { name: "Grupos de Articulos", descp: "Grupos de articulo y su avnace con respecto al concurso." , code: "100" },
+                { name: "Concurso SCJ", descp: "Avance de ventas para el concurso de premios extra trimestrales de SCJ." , code: "100" },
+                
+    		];
+
+    		function mobileListViewTemplatesInit() {
+       	 		$("#custom-listview").kendoMobileListView({
+            	dataSource: kendo.data.DataSource.create({data: groupedData }),
+            	template: $("#customListViewTemplate").html(),
+        		});
+    		}
+			</script>
+            <script>
+                function navigateBack() 
+            	{
+                	var app = new kendo.mobile.Application();
+                	app.navigate("home.html");
+                }
+            </script>
+        </div>
+    </body>
+</html>

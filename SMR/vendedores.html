@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Vendedores</title>
+        <meta charset="utf-8" />
+        <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+        <link href="styles/main.css" rel="stylesheet" />
+
+        <script src="cordova.js"></script>
+        <script src="kendo/js/jquery.min.js"></script>
+        <script src="kendo/js/kendo.mobile.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+
+        <script src="scripts/login.js"></script>
+        <script src="scripts/location.js"></script>
+        <script src="scripts/weather.js"></script>
+        <script src="scripts/app.js"></script>
+
+    </head>
+    <body>
+        <div id="view-vendedores" 
+             data-title="Vendedores" 
+             data-role="view"
+             >
+            <div data-role="header">
+                <div data-role="navbar" style="background-color: black; color: white;">
+                    <span data-role="view-title">Vendedores</span>
+                    <a data-role="backbutton"  data-align="left" style="background-color: black; color: white;">Back</a>
+                	<a data-align="right" onClick="navigateBack();" data-role="button" style="background-color: black; color: white;">Volver</a>
+                </div>
+            </div> 
+            
+            <ul id="custom-listview"></ul>
+            <script type="text/x-kendo-template" id="customListViewTemplate">
+    			<div class="list_title">
+                	<table style="width: 100%">
+                    	<tr>
+                        	<td style="width: 70%; text-align:left;">
+            					${name}
+            				</td>
+                            <td style="width: 70%; text-align:right;">
+                    			<a class="button" data-role="button" onclick="listClick(${code});" style="background-color: black; color: white; font-size:.8em;">Detalle</a>        
+            				</td>
+            			</tr>
+            		</table>
+                </div>
+    			<div class="list_percentage">
+            		<div class="template_label">Avance de Venta</div>
+                    <div class="template_value">${venta}</div>
+                </div>
+                <div class="list_percentage">
+                	<div class="template_label">Avance de Cobro</div>
+                    <div class="template_value">${cobro}</div>
+                </div>
+			</script>
+            
+
+			<script>
+    		var groupedData = [
+                
+                { name: "Mayoreo CentroSurOriente", venta: "83.77%", cobro: "57.00%", code: "100"},
+        		{ name: "Mayoreo CentroSurOriente", venta: "83.77%", cobro: "57.00%" , code: "200"},
+        		{ name: "Detalle CentroSurOriente", venta: "83.77%", cobro: "57.00%", code: "300" },
+        		{ name: "Mayoreo NorteOccidente", venta: "83.77%", cobro: "57.00%", code: "400" },
+        		{ name: "Detalle NorteOccidente", venta: "83.77%", cobro: "57.00%", code: "500" },
+        		{ name: "Supermercados", venta: "83.77%", cobro: "57.00%", code: "600" },
+        		{ name: "Foodservices", venta: "83.77%", cobro: "57.00%", code: "700" },
+    		];
+
+    		function mobileListViewTemplatesInit() {
+       	 		$("#custom-listview").kendoMobileListView({
+            	dataSource: kendo.data.DataSource.create({data: groupedData }),
+            	template: $("#customListViewTemplate").html(),
+        		});
+    		}
+			</script>
+
+			<!--
+            <div data-role="footer">
+          		<div data-role="tabstrip" data-selected-index="1">
+                    <a onClick="navigateToHome();" data-icon="home">Inicio</a>
+                	<a data-icon="contacts">Vendedores</a>
+                    <a onClick="navigateToReportes();" data-icon="organize">Reportes</a>
+                    <a onClick="navigateToAjustes();" data-icon="settings">Ajustes</a>
+           		</div>
+            </div>
+			-->
+            <script>
+                function navigateBack() 
+            	{
+                	var app = new kendo.mobile.Application();
+                	app.navigate("home.html");
+                }
+                function listClick(var1) 
+            	{
+                    alert(String(var1));
+                    var groupedData = [
+                        { name: "Supervisor 120", venta: "83.77%", cobro: "57.00%", code: "100"},
+                        { name: "Supervisor 130", venta: "83.77%", cobro: "57.00%" , code: "200"},
+                    ];
+                        $("#custom-listview").kendoMobileListView({
+                        dataSource: kendo.data.DataSource.create({data: groupedData }),
+                        template: $("#customListViewTemplate").html(),
+                        });
+                }
+            </script>
+        </div>
+    </body>
+</html>

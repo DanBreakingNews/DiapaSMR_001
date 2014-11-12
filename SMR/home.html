@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Inicio</title>
+        <meta charset="utf-8" />
+        <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+        <link href="styles/main.css" rel="stylesheet" />
+
+        <script src="cordova.js"></script>
+        <script src="kendo/js/jquery.min.js"></script>
+        <script src="kendo/js/kendo.mobile.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+
+        <script src="scripts/login.js"></script>
+        <script src="scripts/location.js"></script>
+        <script src="scripts/weather.js"></script>
+        <script src="scripts/app.js"></script>
+
+    </head>
+    <body>
+        <div id="view-home" 
+             data-title="Inicio" 
+             data-role="view"
+             >
+            <div data-role="header">
+                <div data-role="navbar" style="background-color: black; color: white;">
+                    <span data-role="view-title">Inicio</span>
+                    <a data-role="backbutton" 
+                       data-align="left" 
+                       style="background-color: black; color: white;"
+                       onClick="navigateBack();">
+                        Back
+                    </a>
+                </div>
+            </div>    
+            
+            <div class="indicators_container">
+            	Venta y Cobro
+                <div id="two_panel_container">
+                    <div class="porcentaje_container">
+                        <span class="porcentaje_label">90.78%</span>
+                    </div>
+                    <div class="porcentaje_container">
+                        <span class="porcentaje_label">87.87%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="week_container">
+            	<ul data-role="buttongroup">
+                	<li>&nbsp;S01&nbsp;</li>
+                	<li>&nbsp;S02&nbsp;</li>
+                	<li>&nbsp;S03&nbsp;</li>
+                	<li>&nbsp;S04&nbsp;</li>
+            	</ul>
+            </div>
+            
+            <div class="indicators_container">
+                Avance de Venta 
+                <div class="deitel_container" >
+                    <table class="deitel_table">
+                        <tr>
+                            <td class="left_column">
+                                Proyectado
+                            </td>
+                            <td class="right_column">
+                                Lps. 156,423,992.00
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left_column">
+                                Ejecutado
+                            </td>
+                            <td class="right_column">
+                                Lps. 116,423,992.00
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left_column">
+                                Diferencia
+                            </td>
+                            <td class="right_column">
+                                Lps. 40,000,453.00
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                Avance de Cobro 
+                <div class="deitel_container">
+                    <table class="deitel_table">
+                        <tr>
+                            <td class="left_column">
+                                Proyectado
+                            </td>
+                            <td class="right_column">
+                                Lps. 200,110,578.00
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left_column">
+                                Ejecutado
+                            </td>
+                            <td class="right_column">
+                                Lps. 180,423,992.00
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left_column">
+                                Diferencia
+                            </td>
+                            <td class="right_column">
+                                Lps. 20,000,453.00
+                            </td>
+                        </tr>
+                    </table> 
+                </div>
+            </div>
+            
+            <div data-role="footer">
+          		<div id="tabstrip" data-role="tabstrip" data-selected-index="0">
+                    <a onClick="navigateToHome();" data-icon="home">Inicio</a>
+                	<a onClick="navigateToVendedores();" data-icon="contacts">Vendedores</a>
+                    <a onClick="navigateToReportes();" data-icon="organize">Reportes</a>
+                    <a onClick="navigateToAjustes();" data-icon="settings">Ajustes</a>
+           		</div>
+            </div>
+            <script>
+                $( document ).ready(function() {
+                    try
+                    {
+                        var app = new kendo.mobile.Application();
+                    	var tabstrip = app.view().footer.find(".km-tabstrip").data("kendoMobileTabStrip");
+  					  tabstrip.switchTo(0); 
+                    }
+                    catch(err)
+                    {
+                        alert(err.toString());
+                    }
+				});
+                function navigateBack() 
+            	{
+                	var app = new kendo.mobile.Application();
+                	app.navigate("index.html");
+                }
+                function navigateToHome() 
+            	{
+                	var app = new kendo.mobile.Application();
+                	app.navigate("home.html");
+                }
+            	function navigateToVendedores() 
+            	{
+                	var app = new kendo.mobile.Application();
+                	app.navigate("vendedores.html");
+                }
+                function navigateToReportes() 
+            	{
+                	var app = new kendo.mobile.Application();
+                	app.navigate("reportes.html");
+                }
+                function navigateToAjustes() 
+            	{
+                	var app = new kendo.mobile.Application();
+                	app.navigate("ajustes.html");
+                }
+            </script>
+        </div>   
+    </body>
+</html>

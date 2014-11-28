@@ -11,10 +11,6 @@
         <script src="kendo/js/kendo.mobile.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
 
-        <script src="scripts/login.js"></script>
-        <script src="scripts/location.js"></script>
-        <script src="scripts/weather.js"></script>
-        <script src="scripts/app.js"></script>
 
     </head>
     <body>
@@ -75,7 +71,7 @@
                     try
                     {
                         var detType = "GET";
-                        var detUrl = "http://portal.diapa.net:120/SellsMachineRoom/Services/WS05.svc/list";
+                        var detUrl = "http://192.168.0.12:120/SellsMachineRoom/Services/WS05.svc/list";
                         var detData = 'Codigo=' + String(index) ; 
                         var detContentType = "application/json; charset=utf-8";
                         var detDataType = "json";

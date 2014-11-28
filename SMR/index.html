@@ -9,13 +9,6 @@
         <script src="cordova.js"></script>
         <script src="kendo/js/jquery.min.js"></script>
         <script src="kendo/js/kendo.mobile.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-
-        <script src="scripts/login.js"></script>
-        <script src="scripts/location.js"></script>
-        <script src="scripts/weather.js"></script>
-        <script src="scripts/app.js"></script>
-
     </head>
     <body>
         <!--Login-->
@@ -24,7 +17,6 @@
              data-role="view"
              >
                 <div id="main_panel">
-                    
                     <img src="./styles/images/diapa.png" style="height:60px; width:100px;">
                     <br/>
                     <input value="dmartinez" id="username" class="mask_input" type="text" name="username" placeholder="Nombre de usuario"/>
@@ -37,16 +29,14 @@
                 </div>
         </div>
         <script>
-            
             var username;
             var password;
             var codigo;
             var tipo;
             var id;
-            var app = new kendo.mobile.Application();
+            var app;
             var param_index = 0;
             var param_col = 0;
-            
             var varType;
             var varUrl;
             var varData;
@@ -56,14 +46,7 @@
             
              $( document ).ready(function() 
              {
-                /*
-                panel = document.getElementById("panel");
-                alto = $(window).height();   // returns height of browser viewport
-                ancho = $(window).width();   // returns width of browser viewport
-                 
-                panel.style.height= String(alto) + 'px';
-                panel.style.width= String(ancho) + 'px';
-                 */
+                app = new kendo.mobile.Application($(document.body));
              });
             
             function login() 
@@ -118,6 +101,7 @@
                     codigo = parseInt(result.Codigo_Venta); 
                     id = parseInt(result.id);
                     tipo = parseInt(result.Tipo);
+                    
                     app.navigate("inicio.html","zoom");
                 }
                 catch(err)
@@ -130,7 +114,7 @@
 
             function ServiceFailed(result) 
             {
-                alert("No se puedo autentificar al usuario.");
+                alert("No se pudo autentificar al usuario.");
             }
         </script>
         

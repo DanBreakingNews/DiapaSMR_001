@@ -10,7 +10,16 @@
         <script src="kendo/js/jquery.min.js"></script>
         <script src="kendo/js/kendo.mobile.min.js"></script>
     </head>
+    
+    <style type="text/css"> 
+            body
+            {
+                pointer-events: all !important;
+            }
+    </style>
+    
     <body>
+        
         <!--Login-->
         <div id="view-login" 
              data-title="Login" 
@@ -29,6 +38,13 @@
                 </div>
         </div>
         <script>
+            
+            function NavigateBackToHome() 
+            {   
+                app = new kendo.mobile.Application($(document.body));
+                app.navigate("inicio.html","zoom");
+            }
+            
             var username;
             var password;
             var codigo;

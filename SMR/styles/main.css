@@ -186,7 +186,7 @@ body, html
     height:35px;
     width:236px;
     background:url('../styles/images/input_background.png') no-repeat right top; 
-    color:#404040;  
+    color:black !important;  
     font-size:1em;
     padding-left:10px;
 }

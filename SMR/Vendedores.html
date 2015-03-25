@@ -32,11 +32,11 @@
     			<div class="list_title">
                 	<table style="width: 100%">
                     	<tr>
-                        	<td style="width: 70%; text-align:left;">
-            					${ID} - ${Name}
+                        	<td style="width: 70%; text-align:left; color: rgb(199,27,27)">
+            					${id} - ${nombre}
             				</td>
                             <td style="width: 70%; text-align:right;">
-                    			<a class="button" data-role="button" onclick="listClick(${ID});" style="background-color: black; color: white; font-size:.8em;">Detalle</a>        
+                    			<a class="button" data-role="button" onclick="listClick(${id});" style="background-color: black; color: white; font-size:.8em;">Detalle</a>        
             				</td>
             			</tr>
             		</table>
@@ -46,8 +46,20 @@
                     <div class="template_value">${per_venta}</div>
                 </div>
                 <div class="list_percentage">
+                	<div class="template_label">Venta de hoy</div>
+                    <div class="template_value">${per_hoy}</div>
+                </div>
+                <div class="list_percentage">
+                	<div class="template_label">Demanda</div>
+                    <div class="template_value">${per_demanda}</div>
+                </div>
+                <div class="list_percentage">
                 	<div class="template_label">Avance de Cobro</div>
                     <div class="template_value">${per_cobro}</div>
+                </div>
+                <div class="list_percentage">
+                	<div class="template_label">Dias Prom. Pago</div>
+                    <div class="template_value">${per_dias}</div>
                 </div>
                 <br />
 			</script>
@@ -69,7 +81,7 @@
                     try
                     {
                         var vType = "GET";
-                        var vUrl = "http://portal.diapa.net:120/SellsMachineRoom/Services/WS03.svc/list";
+                        var vUrl = "http://localhost:1564/Home/VendedoresList";
                         var vData = 'Codigo=' + String(codigo) + '&Tipo=' + String(tipo)  ;
                         var vContentType = "application/json; charset=utf-8";
                         var vDataType = "json";
@@ -124,6 +136,10 @@
                             
                             result[i].per_venta = String(per_venta.toFixed(2)) + "%"; 
                             result[i].per_cobro = String(per_cobro.toFixed(2)) + "%";
+                            
+                            result[i].per_hoy = "L. " + String(result[i].venta.toFixed(2));
+                            result[i].per_demanda = "L. " + String(result[i].demanda.toFixed(2));
+                            result[i].per_dias = String(result[i].dias.toFixed(2));
                         }
                         
                         dataVendedores = new kendo.data.DataSource({
@@ -134,7 +150,8 @@
                     }
                     catch(err)
                     {
-                         alert(error.toString());   
+                            alert("error");  
+                         alert(err.toString());   
                     }
                      
                 }
@@ -216,10 +233,6 @@
                         default:
                             return 30;
                     }
-                }
-                function NavigateBackV() 
-                {
-                     app.navigate("inicio.html");   
                 }
             </script>
         </div>

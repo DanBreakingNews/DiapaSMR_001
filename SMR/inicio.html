@@ -45,10 +45,10 @@
             
             <div id="week_container">
             	<ul data-role="buttongroup" data-index="0" data-select="onSelect">
-                	<li>&nbsp;S01&nbsp;</li>
-                	<li>&nbsp;S02&nbsp;</li>
-                	<li>&nbsp;S03&nbsp;</li>
-                	<li>&nbsp;S04&nbsp;</li>
+                	<li style="background-color: #C71B1B;">&nbsp;S01&nbsp;</li>
+                	<li style="background-color: #C71B1B;">&nbsp;S02&nbsp;</li>
+                	<li style="background-color: #C71B1B;">&nbsp;S03&nbsp;</li>
+                	<li style="background-color: #C71B1B;">&nbsp;S04&nbsp;</li>
             	</ul>
             </div>
             
@@ -109,15 +109,87 @@
                                 <label id="c3">L. 0.00</label>
                             </td>
                         </tr>
+                        <tr>
+                            <td class="left_column">
+                                Dias Prom. Pago
+                            </td>
+                            <td class="right_column">
+                                <label id="c4">L. 0.00</label>
+                            </td>
+                        </tr>
+                    </table> 
+                </div>
+                Información de Pedidos
+                <div class="deitel_container">
+                    <table class="deitel_table">
+                        <tr>
+                            <td class="left_column">
+                                Pedidos Ingresados
+                            </td>
+                            <td class="right_column">
+                                <label id="i1">L. 0.00</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left_column">
+                                Valor de Pedidos
+                            </td>
+                            <td class="right_column">
+                                <label id="i2">L. 0.00</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left_column">
+                                Pedidos Retenidos
+                            </td>
+                            <td class="right_column">
+                                <label id="i3">L. 0.00</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left_column">
+                                Valor Ped. Retenidos
+                            </td>
+                            <td class="right_column">
+                                <label id="i4">L. 0.00</label>
+                            </td>
+                        </tr>
+                    </table> 
+                </div>
+                Venta del Dia
+                <div class="deitel_container">
+                    <table class="deitel_table">
+                        <tr>
+                            <td class="left_column">
+                                Venta del Dia
+                            </td>
+                            <td class="right_column">
+                                <label id="d1">L. 0.00</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left_column">
+                                Demanda
+                            </td>
+                            <td class="right_column">
+                                <label id="d2">L. 0.00</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left_column">
+                                Sku Activos 
+                            </td>
+                            <td class="right_column">
+                                <label id="d3">L. 0.00</label>
+                            </td>
+                        </tr>
                     </table> 
                 </div>
             </div>
             <div style="margin:auto; width:95%; padding-top:1em;">
-                <a data-role="button" data-animated="true" style="width:90%; font-size: 1.1em" onClick="Click001()">Avance de Venta</a><br/>
+                <a data-role="button" data-animated="true" style="width:90%; font-size: .9em" onClick="Click001()">Avance de Venta</a><br/>
                 <div style="padding:.1em;"></div>
-                <a data-role="button" data-animated="true" style="width:90%; font-size: 1.1em" onClick="Click002()">Reportes</a><br/>
-                <div style="padding:.1em;"></div>
-                <a data-role="button" data-animated="true" style="width:90%; font-size: 1.1em" onClick="Click003()">Configuración</a>
+                <a data-role="button" data-animated="true" style="width:90%; font-size: .9em" onClick="Click002()">Reportes</a><br/>
             </div>
             
             <script>
@@ -126,6 +198,7 @@
                 function initHome(e) 
                 {
                     callWebService("1") ;
+                    ServicioInfoDias();
                 }
                 
                 function onSelect(e) 
@@ -135,6 +208,7 @@
                         var index = this.current().index();
                         index = index + 1;
                         callWebService(String(index)) ;
+                        
                     }
                     catch(err)
                     {
@@ -214,7 +288,72 @@
                     }
                      
                 }
-
+                
+                function ServicioInfoDias()
+                {
+                    try
+                    {
+                        var vaType = "GET";
+                        var vaUrl = "http://localhost:1564/Home/InformacionDelDia";
+                        var vaData = 'Codigo=' + String(codigo) + '&Tipo=' + String(tipo); 
+                        var vaContentType = "application/json; charset=utf-8";
+                        var vaDataType = "json";
+                        var vaProcessData = true; 
+                
+                        $.ajax({
+                        type          : vaType, //GET or POST or PUT or DELETE verb
+                        url           : vaUrl, // Location of the service
+                        data          : vaData, //Data sent to server
+                        contentType   : vaContentType, // content type sent to server
+                        dataType      : vaDataType, //Expected data format from server
+                        processdata   : vaProcessData, //True or False
+                        success       : function(msg) {//On Successfull service call
+                            ServiceFound(msg);                    
+                        },
+                        error: ServiceNotFind// When Service call fails
+                        });
+                        
+                        
+                    }
+                    catch(err)
+                    {
+                        alert(err.toString());
+                    }
+				}
+                
+                function ServiceFound(result) 
+                {
+                    try
+                    {
+                        var i1 = result.PEDIDOS;
+                        var i2 = result.VPEDIDOS;
+                        var i3 = result.RETENIDOS;
+                        var i4 = result.VRETENIDOS;
+                        
+                        var d1 = result.VENTA;
+                        var d2 = result.DEMANDA;
+                        var d3 = result.SKU;
+                        
+                        var c4 = result.DIAS;
+                        
+                        document.getElementById("i1").innerHTML  = String(i1);
+                        document.getElementById("i2").innerHTML  = String(i2);
+                        document.getElementById("i3").innerHTML  = String(i3);
+                        document.getElementById("i4").innerHTML  = String(i4);
+                        
+                        document.getElementById("d1").innerHTML  = String(d1);
+                        document.getElementById("d2").innerHTML  = String(d2);
+                        document.getElementById("d3").innerHTML  = String(d3);
+                        
+                        document.getElementById("c4").innerHTML  = String(c4);
+                    }
+                    catch(err)
+                    {
+                         alert(error.toString());   
+                    }
+                     
+                }
+                
                 function ServiceNotFind(result) 
                 {
                     alert("Error en conexión.");

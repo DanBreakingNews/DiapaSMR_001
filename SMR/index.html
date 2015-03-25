@@ -26,23 +26,23 @@
              data-role="view"
              >
                 <div id="main_panel">
-                    <img src="./styles/images/diapa.png" style="height:60px; width:100px;">
+                    <img src="./styles/images/diapa.png" style="height:80px; width:120px;">
                     <br/>
                     <input value="dmartinez" id="username" class="mask_input" type="text" name="username" placeholder="Nombre de usuario"/>
                     <br/>
                     <input value="qwerty" id="password" class="mask_input" type="password" name="password" placeholder="Contraseña"/>
                     <br/>
                     <div id="contenedor_boton">
-                        <a data-role="button" onClick="login();" style="background-color: black; color: white; font-size: 1.2em">Ingresar</a>    
+                        <a data-role="button" onclick="login()" style="background-color: black; color: white; font-size: 1em">Ingresar</a>    
                     </div>
                 </div>
         </div>
         <script>
+            app = new kendo.mobile.Application($(document.body), { initial: "#tabstrip-home" });
             
             function NavigateBackToHome() 
             {   
-                app = new kendo.mobile.Application($(document.body));
-                app.navigate("inicio.html","zoom");
+                app.navigate("#:back");
             }
             
             var username;
@@ -62,7 +62,7 @@
             
              $( document ).ready(function() 
              {
-                app = new kendo.mobile.Application($(document.body));
+                
              });
             
             function login() 
